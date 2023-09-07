@@ -1,0 +1,19 @@
+# Environment Variables
+.env
+*/.env
+
+# Testing Data for Logging
+testfiles/
+*/testfiles/
+
+# Raw Audio Datasets
+audiofiles/
+*/audiofiles/
+
+# Node.js Dependencies
+node_modules/
+*/node_modules/
+
+# Node.js Environment Config File
+package-lock.json
+*/package-lock.json
