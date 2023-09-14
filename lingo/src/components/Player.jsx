@@ -52,7 +52,7 @@ const PSlider = styled(Slider)(({theme, ...props}) => ({
 }))
 
 
-const playlist = [simpsons, bolano, spanish];
+const playlist = [film, simpsons, bolano, spanish];
 
 
 export default function Player() {

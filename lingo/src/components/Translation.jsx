@@ -1,22 +1,39 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const RightContainer = () => {
+const LeftContainer = () => {
+  const [currentTranslation, setCurrentTranslation] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [currentTranslation, setcurrentTranslation] = useState([]);
-  useEffect(()=>{
-      axios.get('http://localhost:3001/getTranslation')
-      .then(currentTranslation => setcurrentTranslation(currentTranslation.data))
-      .catch(err => console.log(err))
-      console.log(currentTranslation)
-  }, [])
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/getTranslation')
+      .then((response) => {
+        setCurrentTranslation(response.data);
+        setLoading(false); // Set loading to false when data is received
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false); // Set loading to false on error
+      });
+  }, []);
 
   return (
     <div className="container">
       <h2>Translation</h2>
-      {currentTranslation}
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          {currentTranslation.map((item) => (
+            <div key={item.id}>
+              {item.text}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
-export default RightContainer;
+export default LeftContainer;

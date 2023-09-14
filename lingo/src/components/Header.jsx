@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LanguageDropdown from './LanguageDropdown';
 import SignIn from './SignIn';
 import axios from 'axios';
+import MyWords from './MyWords';
 
 const Header = () => {
   const [url, setUrl] = useState('');
@@ -61,6 +62,7 @@ const Header = () => {
         <div className="header-right">
           <div className="language-and-signin">
             <LanguageDropdown onLanguageChange={handleLanguageChange} />
+            <MyWords/>
             <SignIn />
           </div>
         </div>

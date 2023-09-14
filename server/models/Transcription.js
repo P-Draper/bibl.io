@@ -7,5 +7,5 @@ const TranscriptionSchema = new mongoose.Schema(
         }
     })
 
-const TranscriptionModel = mongoose.model("transcription", TranscriptionSchema)
+const TranscriptionModel = mongoose.model("transcriptions", TranscriptionSchema)
 module.exports = TranscriptionModel
