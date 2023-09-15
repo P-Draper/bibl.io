@@ -11,7 +11,9 @@ const MyWords = ({ wordList, addWord, toggleWordCompletion }) => {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      addWord(word);
+      if (!wordList.some((item) => item.text === word)) {
+        addWord(word);
+      }
       setWord('');
     }
   };
@@ -29,6 +31,7 @@ const MyWords = ({ wordList, addWord, toggleWordCompletion }) => {
             value={word}
             onChange={(e) => setWord(e.target.value)}
             onKeyPress={handleKeyPress}
+            className='word-input'
           />
           <button onClick={() => addWord(word)}>Add</button>
           <ul>

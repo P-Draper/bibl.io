@@ -33,7 +33,7 @@ const Header = ({ wordList, addWord, toggleWordCompletion }) => {
               placeholder="YouTube URL here!"
               onChange={(e) => setUrl(e.target.value)}
             />
-            <button type="submit">BIBL.IO!</button>
+            <button type="submit">bibl.io!</button>
           </form>
         </div>
         <div className="header-right">
