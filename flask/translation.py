@@ -19,4 +19,4 @@ translation = openai.Audio.translate(
     file = media_file,
     response_format = 'json'
 )
-print(translation)
+print(translation['text'].encode().decode())

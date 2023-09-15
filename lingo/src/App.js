@@ -1,40 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Transcription from './components/Transcription';
 import Translation from './components/Translation';
 import Player from './components/Player';
-import { useEffect, useState } from 'react';
-import axios from 'axios'
-
-
+import Footer from './components/Footer';
+import axios from 'axios';
 
 function App() {
-  const [users, setUsers] = useState([])
-  useEffect(()=>{
-    axios.get('http://localhost:3001/getUsers')
-    .then(users => setUsers(users.data))
-    .catch(err => console.log(err))
-  }, [])
+  const [wordList, setWordList] = useState([]); // Create the wordList state
 
-/*
-  const [requestedAudio, setRequestedAudio] = useState([])
+  // Function to add a word to the wordList
+  const addWord = (word) => {
+    if (word.trim() !== '') {
+      setWordList([...wordList, { text: word, isCompleted: false }]);
+    }
+  };
 
-  useEffect(()=>{
-    axios.get('http://localhost:3001/getAudio')
-    .then(()=> console.log('wow'))
-    .then(requestedAudio => setRequestedAudio(requestedAudio.data))
-    .catch(err => console.log(err))
-    console.log("anything", requestedAudio)
-  }, [])
-*/
+  // Function to toggle word completion
+  const toggleWordCompletion = (index) => {
+    const updatedWordList = [...wordList];
+    if (updatedWordList[index].isCompleted) {
+      updatedWordList.splice(index, 1); // Remove the word from the array
+    } else {
+      updatedWordList[index].isCompleted = true; // Mark the word as completed
+    }
+    setWordList(updatedWordList);
+  };
+
   return (
     <div className="App">
-      <Header />
+      <Header wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} />
       <Player />
       <div className="containers">
-        <Transcription/>
-        <Translation/>
+        <Transcription wordList={wordList} />
+        <Translation />
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );

@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { franc } from 'franc';
 
 const LeftContainer = () => {
   const [currentTranslation, setCurrentTranslation] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [detectedLanguage, setDetectedLanguage] = useState('');
 
   useEffect(() => {
     axios
       .get('http://localhost:3001/getTranslation')
       .then((response) => {
         setCurrentTranslation(response.data);
-        setLoading(false); // Set loading to false when data is received
+        setLoading(false);
+        const language = detectLanguage(response.data);
+        setDetectedLanguage(language);
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false); // Set loading to false on error
+        setLoading(false);
       });
   }, []);
 
+  const detectLanguage = (text) => {
+    return franc(text.join(' '));
+  };
+
   return (
     <div className="container">
-      <h2>Translation</h2>
+      <p className='detected-translation'>{detectedLanguage.toUpperCase()}</p>
       {loading ? (
         <p>Loading...</p>
       ) : (

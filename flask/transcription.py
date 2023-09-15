@@ -19,4 +19,4 @@ transcription = openai.Audio.transcribe(
     response_format = 'json'
 )
 
-print(transcription)
+print(transcription['text'].encode().decode())

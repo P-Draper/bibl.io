@@ -1,9 +1,8 @@
-/* Global styles */
+
 html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: #245487;
 }
 
@@ -15,21 +14,20 @@ body {
   height: 100%;
 }
 
-/* Header styles */
 header {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  margin-left: 650px;
+  justify-content: center; 
+  margin-left: 620px;
   padding: 20px;
   background-color: #245487;
   color: #fff;
   font-weight: bold;
 }
 
-/* Center the header content */
+
 .header-content {
   display: flex;
-  align-items: center; /* Center vertically */
+  align-items: center; 
 }
 
 .search-bar {
@@ -40,7 +38,7 @@ header {
 
 .language-and-signin {
   display: flex;
-  margin-left: 220px;
+  margin-left: 200px;
 }
 input[type="text"] {
   padding: 8px;
@@ -48,6 +46,7 @@ input[type="text"] {
   margin-right: 10px;
   background-color: #dad1b3;
   text-align: center;
+  width: 250px;
 }
 
 button {
@@ -60,7 +59,7 @@ button {
   font-weight: bold;
 }
 
-/* Dropdown styles */
+
 .language-dropdown {
   position: relative;
   display: inline-block;
@@ -98,12 +97,12 @@ button {
 .dropdown-list .language-item {
   padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s; /* Add a transition for smooth hover effect */
+  transition: background-color 0.3s; 
   border-radius: 20px;
 }
 
 .dropdown-list .language-item:hover {
-  background-color: #40D3D6; /* Highlight in blue on hover */
+  background-color: #40D3D6;
   color: #fff;
 }
 
@@ -111,12 +110,10 @@ button {
   display: block;
 }
 
-/* Container styles */
 .containers {
   flex: 1;
   display: flex;
   justify-content: space-between;
-  overflow: hidden;
   margin: 0 10px;
   margin-right: 25px;
   margin-left: 25px;
@@ -135,4 +132,14 @@ button {
   text-align: center;
   overflow-y: auto;
   height: 100%;
+}
+.detected-lang {
+  margin-left: -630px;
+  margin-top: -5px;
+  font-weight: bold;
+}
+.detected-translation {
+  margin-left: 625px;
+  margin-top: -5px;
+  font-weight: bold;
 }
