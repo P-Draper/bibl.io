@@ -85,7 +85,7 @@ app.post('/postUrl', (req, res) => {
     const { Url, DesiredLanguage } = req.body;
 
     const newUrl = new UrlModel({ Url, DesiredLanguage });
-    fetch('/convertUrl')
+    fetch('http://localhost:3001/convertUrl')
     newUrl.save()
         .then(savedUrl => {
             console.log("URL saved successfully:", savedUrl);

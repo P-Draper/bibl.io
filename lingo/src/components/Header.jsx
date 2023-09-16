@@ -1,51 +1,66 @@
-  import React, { useState } from 'react';
-  import LanguageDropdown from './LanguageDropdown';
-  import SignIn from './SignIn';
-  import axios from 'axios';
-  import MyWords from './MyWords';
+import React, { useState, useEffect } from 'react';
+import LanguageDropdown from './LanguageDropdown';
+import SignIn from './SignIn';
+import axios from 'axios';
+import MyWords from './MyWords';
 
-  const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl}) => {
+const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl }) => {
+  const [desiredLanguage, setDesiredLanguage] = useState('');
 
-    const [desiredLanguage, setDesiredLanguage] = useState('');
+  useEffect(() => {
+    // Check if desiredLanguage is empty, and if so, set it to the default value
+    if (desiredLanguage === '') {
+      setDesiredLanguage('🇺🇸 | English');
+    }
+  }, []);
 
-    const handleLanguageChange = (language) => {
-      setDesiredLanguage(language);
-    };
-
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      try {
-        console.log('URL:', url);
-      } catch (error) {
-        console.error('Error posting data:', error);
-      }
-    };
-
-    return (
-      <header>
-        <div className="header-content">
-          <div className="search-bar">
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                spellCheck="false"
-                value={url}
-                placeholder="YouTube URL here!"
-                onChange={(e) => setUrl(e.target.value)}
-              />
-              <button type="submit">bibl.io!</button>
-            </form>
-          </div>
-          <div className="header-right">
-            <div className="language-and-signin">
-              <LanguageDropdown onLanguageChange={handleLanguageChange} />
-              <MyWords wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} />
-              <SignIn />
-            </div>
-          </div>
-        </div>
-      </header>
-    );
+  const handleLanguageChange = (language) => {
+    setDesiredLanguage(language);
   };
 
-  export default Header;
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      if (url.includes('www.youtube.com')) {
+        console.log('URL:', url);
+        const response = await axios.post('http://localhost:3001/postUrl', {
+          Url: url,
+          DesiredLanguage: desiredLanguage,
+        });
+        console.log('Data posted successfully:', response.data);
+      } else {
+        console.log('URL does not contain www.youtube.com. Not setting the URL.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  return (
+    <header>
+      <div className="header-content">
+        <div className="search-bar">
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              spellCheck="false"
+              value={url}
+              placeholder="YouTube URL here!"
+              onChange={(e) => setUrl(e.target.value)}
+            />
+            <button type="submit">bibl.io!</button>
+          </form>
+        </div>
+        <div className="header-right">
+          <div className="language-and-signin">
+            <LanguageDropdown onLanguageChange={handleLanguageChange} />
+            <MyWords wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} />
+            <SignIn />
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
