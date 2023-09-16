@@ -3,7 +3,7 @@ import axios from 'axios';
 import { franc } from 'franc';
 
 const LeftContainer = ({ wordList }) => {
-  const [currentTranscription, setCurrentTranscription] = useState([]);
+  const [currentTranscription, setCurrentTranscription] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,19 +24,17 @@ const LeftContainer = ({ wordList }) => {
   const renderHighlightedText = (text) => {
     const detectedLanguage = franc(text);
 
-    const wordListPattern = new RegExp(`\\b(${wordList.join('|')})\\b`, 'gi');
-    const parts = text.split(wordListPattern);
-    const filteredParts = parts.filter((part) => {
-      return /\D/.test(part);
-    });
+    const words = text.split(/\b/);
+
     return (
       <div>
         <p className='detected-lang'>{detectedLanguage.toUpperCase()}</p>
-        {filteredParts.map((part, index) => {
-          if (wordList.includes(part.toLowerCase())) {
-            return <span key={index} style={{ color: 'red' }}>{part}</span>;
+        {words.map((word, index) => {
+          const lowerCaseWord = word.toLowerCase();
+          if (wordList.includes(lowerCaseWord)) {
+            return <span key={index} style={{ backgroundColor: 'red' }}>{word}</span>;
           }
-          return part;
+          return <span key={index}>{word}</span>;
         })}
       </div>
     );

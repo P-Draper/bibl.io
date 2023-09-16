@@ -8,7 +8,8 @@ const UrlModel = require('./models/Url')
 const WordListModel = require('./models/WordList')
 const TranscriptionModel = require('./models/Transcription')
 const TranslationModel = require('./models/Translation')
-
+const userRoutes = require('./routes/userRoutes')
+const {notFound, errorHandler} = require('./middlewares/errorMiddleware')
 
 const app = express()
 dotenv.config()
@@ -95,6 +96,11 @@ app.post('/postUrl', (req, res) => {
             res.status(500).json({ error: "Failed to save URL" });
         });
 });
+
+app.use('/api/users',userRoutes)
+
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(3001, () => {
     connect()

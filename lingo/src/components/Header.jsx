@@ -1,51 +1,51 @@
-import React, { useState } from 'react';
-import LanguageDropdown from './LanguageDropdown';
-import SignIn from './SignIn';
-import axios from 'axios';
-import MyWords from './MyWords';
+  import React, { useState } from 'react';
+  import LanguageDropdown from './LanguageDropdown';
+  import SignIn from './SignIn';
+  import axios from 'axios';
+  import MyWords from './MyWords';
 
-const Header = ({ wordList, addWord, toggleWordCompletion }) => {
-  const [url, setUrl] = useState('');
-  const [desiredLanguage, setDesiredLanguage] = useState('');
+  const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl}) => {
 
-  const handleLanguageChange = (language) => {
-    setDesiredLanguage(language);
-  };
+    const [desiredLanguage, setDesiredLanguage] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      // Your submit logic here
-    } catch (error) {
-      console.error('Error posting data:', error);
-    }
-  };
+    const handleLanguageChange = (language) => {
+      setDesiredLanguage(language);
+    };
 
-  return (
-    <header>
-      <div className="header-content">
-        <div className="search-bar">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              spellCheck="false"
-              value={url}
-              placeholder="YouTube URL here!"
-              onChange={(e) => setUrl(e.target.value)}
-            />
-            <button type="submit">bibl.io!</button>
-          </form>
-        </div>
-        <div className="header-right">
-          <div className="language-and-signin">
-            <LanguageDropdown onLanguageChange={handleLanguageChange} />
-            <MyWords wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} />
-            <SignIn />
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      try {
+        console.log('URL:', url);
+      } catch (error) {
+        console.error('Error posting data:', error);
+      }
+    };
+
+    return (
+      <header>
+        <div className="header-content">
+          <div className="search-bar">
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                spellCheck="false"
+                value={url}
+                placeholder="YouTube URL here!"
+                onChange={(e) => setUrl(e.target.value)}
+              />
+              <button type="submit">bibl.io!</button>
+            </form>
+          </div>
+          <div className="header-right">
+            <div className="language-and-signin">
+              <LanguageDropdown onLanguageChange={handleLanguageChange} />
+              <MyWords wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} />
+              <SignIn />
+            </div>
           </div>
         </div>
-      </div>
-    </header>
-  );
-};
+      </header>
+    );
+  };
 
-export default Header;
+  export default Header;

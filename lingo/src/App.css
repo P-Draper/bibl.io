@@ -17,7 +17,7 @@ body {
 header {
   display: flex;
   justify-content: center; 
-  margin-left: 620px;
+  margin-left: 580px;
   padding: 20px;
   background-color: #245487;
   color: #fff;
@@ -142,4 +142,11 @@ button {
   margin-left: 625px;
   margin-top: -5px;
   font-weight: bold;
+}
+.video-title {
+  position: relative; 
+  top: 60px; 
+  margin-left: 650px;
+  margin-top: -40px;
+  z-index: 1; 
 }

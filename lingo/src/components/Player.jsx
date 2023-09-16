@@ -26,7 +26,7 @@ const Div = styled('div')(({theme}) => ({
     backgroundColor: '#245487',
     height:'13vh',
     width:'100vw',
-    paddingTop: theme.spacing(0)
+    paddingTop: theme.spacing(0),
 }))
 
 const CustomPaper = styled(Paper)(({theme}) => ({
@@ -36,6 +36,7 @@ const CustomPaper = styled(Paper)(({theme}) => ({
     padding: theme.spacing(),
     borderRadius: 40,
     border: '2px solid #dad1b3'
+    
 }))
 
 const PSlider = styled(Slider)(({theme, ...props}) => ({
@@ -57,14 +58,12 @@ const playlist = [film, simpsons, bolano, spanish];
 
 export default function Player() {
     const [requestedAudio, setRequestedAudio] = useState([])
-    //const playlist = requestedAudio;
     const audioPlayer = useRef()
 
     const [index, setIndex] = useState(0);
 
     const [currentAudio, setcurrentAudio] = useState([playlist[index]]);
 
-    //const [requestedAudio, setRequestedAudio] = useState([])
 
     async function getData() {
         try{
