@@ -80,6 +80,7 @@ button:hover {
 .language-dropdown {
   position: relative;
   display: inline-block;
+  color:black
 }
 
 .dropdown-button-container {
@@ -169,3 +170,20 @@ button:hover {
   margin-top: -40px;
   z-index: 1; 
 }
+.signout-dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #245487;
+  z-index: 1; /* Ensure it appears above other content */
+  display: none;
+}
+
+.signout-dropdown:hover .dropdown-content {
+  display: block; /* Show the dropdown when the button is hovered */
+}
+

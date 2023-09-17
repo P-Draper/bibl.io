@@ -10,6 +10,7 @@ import axios from 'axios';
 
 function App() {
   const [wordList, setWordList] = useState([]);
+  const [username, setUsername] = useState('')
   const addWord = (word) => {
     if (word.trim() !== '') {
       setWordList([...wordList, { text: word, isCompleted: false }]);
@@ -31,6 +32,15 @@ function App() {
   const handleUrlChange = (newUrl) => {
     setUrl(newUrl);
   };
+
+  useEffect(() => {
+    const userInfoString = localStorage.getItem('userInfo');
+    if (userInfoString) {
+      const userInfo = JSON.parse(userInfoString);
+      const userUsername = userInfo.username;
+      setUsername(userUsername);
+    }
+  }, []);
 
 const [videoTitle, setVideoTitle] = useState('');
 
@@ -58,7 +68,7 @@ useEffect(() => {
 }, [url]);
   return (
     <div className="App">
-      <Header wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} url={url} setUrl={handleUrlChange}/>
+      <Header wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} url={url} setUrl={handleUrlChange} username={username}/>
       <Player />
       <div>
         <ContainerHead videoTitle={videoTitle}/>

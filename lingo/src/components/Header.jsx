@@ -3,8 +3,9 @@ import LanguageDropdown from './LanguageDropdown';
 import SignIn from './SignIn';
 import axios from 'axios';
 import MyWords from './MyWords';
+import SignOut from './SignOut';
 
-const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl }) => {
+const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl, username }) => {
   const [desiredLanguage, setDesiredLanguage] = useState('');
 
   useEffect(() => {
@@ -55,7 +56,7 @@ const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl }) => {
           <div className="language-and-signin">
             <LanguageDropdown onLanguageChange={handleLanguageChange} />
             <MyWords wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} />
-            <SignIn />
+            {username ? <SignOut username={username}/> : <SignIn />}
           </div>
         </div>
       </div>

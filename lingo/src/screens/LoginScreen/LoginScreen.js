@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginScreen.css';
 import axios from 'axios'
@@ -11,10 +11,17 @@ function LoginScreen() {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  useEffect(() => {
+    const userInfo = localStorage.getItem('userInfo')
+    if (userInfo) {
+      navigate('/')
+    }
+  }, [navigate])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    try{
+    try {
         const config = {
             headers: {
                 'Content-type':'application/json'
@@ -28,9 +35,10 @@ function LoginScreen() {
         },
         config
         )
-      localStorage.setItem('userInfo',JSON.stringify(data))
+      localStorage.setItem('userInfo', JSON.stringify(data))
       setLoading(false)
-    }catch(error) {
+      navigate('/'); // Use navigate for navigation
+    } catch(error) {
       setError(error.response.data.message)
     }
   };
