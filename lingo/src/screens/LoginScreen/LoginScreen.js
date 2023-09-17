@@ -23,7 +23,7 @@ function LoginScreen() {
 
         setLoading(true)
 
-        const { data } = await axios.post('/api/users/login', {
+        const { data } = await axios.post('http://localhost:3001/api/users/login', {
           username, password 
         },
         config

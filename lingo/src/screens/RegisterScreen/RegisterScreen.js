@@ -1,20 +1,43 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RegisterScreen.css'; // Create a new CSS file for styling if needed
+import axios from 'axios';
 
 function RegisterScreen() {
   const navigate = useNavigate();
-
+  const [message, setMessage] = useState(null)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Username:', username);
-    console.log('Password:', password);
 
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match!')
+    }else{
+      setMessage(null)
+      try {
+        const config = {
+          headers: {
+            'Content-type': 'application/json',
+          }
+        }
+        setLoading(true)
+        const { data } = await axios.post(
+          'http://localhost:3001/api/users',
+          { username, password },
+          config
+        )
+        setLoading(false)
+        localStorage.setItem('userInfo', JSON.stringify(data))
+      } catch (error) {
+        setError(error.response.data.message)
+      }
 
+    }
     setUsername('');
     setPassword('');
     setConfirmPassword('');
