@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginScreen.css';
+import axios from 'axios'
 
 function LoginScreen() {
   const navigate = useNavigate();
@@ -8,14 +9,30 @@ function LoginScreen() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Username:', username);
-    console.log('Password:', password);
+    
+    try{
+        const config = {
+            headers: {
+                'Content-type':'application/json'
+            }
+        }
 
-    setUsername('');
-    setPassword('');
+        setLoading(true)
+
+        const { data } = await axios.post('/api/users/login', {
+          username, password 
+        },
+        config
+        )
+      localStorage.setItem('userInfo',JSON.stringify(data))
+      setLoading(false)
+    }catch(error) {
+      setError(error.response.data.message)
+    }
   };
 
   const handleRegisterClick = () => {
