@@ -17,7 +17,7 @@ body {
 header {
   display: flex;
   justify-content: center; 
-  margin-left: 580px;
+  margin-left: 630px;
   padding: 20px;
   background-color: #245487;
   color: #fff;
@@ -33,32 +33,49 @@ header {
 .search-bar {
   display: flex;
   align-items: center;
-  margin-right: 10px; 
+  margin-right: 10px;
+  scale: 1.2 
 }
 
 .language-and-signin {
   display: flex;
-  margin-left: 200px;
+  margin-left: 180px;
+  scale: 0.95
 }
 input[type="text"] {
   padding: 8px;
   border-radius: 20px;
   margin-right: 10px;
-  background-color: #dad1b3;
+  background-color: #e5e2d6;
   text-align: center;
   width: 250px;
 }
 
 button {
-  background-color: #dad1b3;
+  background-color: #e5e2d6;
   color: black;
-  border: none;
   padding: 8px 16px;
   cursor: pointer;
   border-radius: 30px;
   font-weight: bold;
+  transition: background-color 0.3s; 
+}
+.submit-button{
+  background-color: #e5e2d6;
+  color: black;
+  border: 2px solid #40D3D6;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.6s ease; 
 }
 
+button:hover {
+  background-color: #06DADD; 
+  color: white
+}
 
 .language-dropdown {
   position: relative;
@@ -71,9 +88,10 @@ button {
 }
 
 .dropdown-button {
-  margin-left: auto;
-  padding: 10px 10px;
-  background-color: #dad1b3;
+  margin-left: 10px;
+  padding: 7px 6px;
+  margin-top: 2px;
+  background-color: #e5e2d6;
   color: black;
   border: none;
   cursor: pointer;
@@ -88,7 +106,7 @@ button {
   list-style: none;
   padding: 0;
   margin: 0;
-  background-color: #dad1b3;
+  background-color: #e5e2d6;
   border: 1px solid black;
   border-top: none;
   border-radius: 20px;
@@ -117,7 +135,7 @@ button {
   margin: 0 10px;
   margin-right: 25px;
   margin-left: 25px;
-  background-color: #dad1b3;
+  background-color: #e5e2d6;
   padding: 20px;
   overflow-y: auto;
   height: 100%;
@@ -127,7 +145,6 @@ button {
 .container {
   flex: 1;
   padding: 20px;
-  border: 1px solid #dad1b3;
   margin: 0 10px;
   text-align: center;
   overflow-y: auto;
@@ -137,11 +154,13 @@ button {
   margin-left: -630px;
   margin-top: -5px;
   font-weight: bold;
+  font-size: 20px
 }
 .detected-translation {
   margin-left: 625px;
   margin-top: -5px;
   font-weight: bold;
+  font-size: 20px
 }
 .video-title {
   position: relative; 

@@ -8,7 +8,6 @@ const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl }) => {
   const [desiredLanguage, setDesiredLanguage] = useState('');
 
   useEffect(() => {
-    // Check if desiredLanguage is empty, and if so, set it to the default value
     if (desiredLanguage === '') {
       setDesiredLanguage('🇺🇸 | English');
     }
@@ -17,6 +16,7 @@ const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl }) => {
   const handleLanguageChange = (language) => {
     setDesiredLanguage(language);
   };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,7 +48,7 @@ const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl }) => {
               placeholder="YouTube URL here!"
               onChange={(e) => setUrl(e.target.value)}
             />
-            <button type="submit">bibl.io!</button>
+            <button className='submit-button' type="submit-button">bibl.io!</button>
           </form>
         </div>
         <div className="header-right">

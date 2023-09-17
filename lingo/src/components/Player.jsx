@@ -30,12 +30,11 @@ const Div = styled('div')(({theme}) => ({
 }))
 
 const CustomPaper = styled(Paper)(({theme}) => ({
-    backgroundColor: '#40D3D6',
+    backgroundColor: '#06DADD',
     marginLeft: theme.spacing(40),
     marginRight: theme.spacing(40),
     padding: theme.spacing(),
     borderRadius: 40,
-    border: '2px solid #dad1b3'
     
 }))
 

@@ -1,0 +1,79 @@
+/* RegisterScreen.css */
+
+/* Style for the header */
+.register-screen-header {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    left: 10px; /* Adjust the left position as needed */
+  }
+  
+  /* Style for the "bibl.io" link */
+  .register-screen-home-link {
+    font-size: 40px;
+    margin-left: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .register-screen-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .register-screen-box {
+    background-color: #e5e2d6;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+  }
+  
+  .register-screen-form-group {
+    margin: 10px 0;
+  }
+  
+  .register-screen-form-group label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .register-screen-box input[type="text"],
+  .register-screen-box input[type="email"],
+  .register-screen-box input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    margin-left: -8px;
+  }
+  
+  .register-screen-box button {
+    background-color: #40D3D6;
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .register-screen-box button:hover {
+    background-color: #245487;
+  }
+  
+  .register-screen-button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .register-screen-login-button {
+    margin-left: 20px;
+  }
+  

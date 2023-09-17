@@ -1,0 +1,78 @@
+/* LoginScreen.css */
+
+/* Style for the header */
+.login-screen-header {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    left: 10px; /* Adjust the left position as needed */
+  }
+  
+  /* Style for the "bibl.io" link */
+  .login-screen-home-link {
+    font-size: 40px; 
+    margin-left: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .login-screen-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .login-screen-box {
+    background-color: #e5e2d6;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+  }
+  
+  .login-screen-form-group {
+    margin: 10px 0;
+  }
+  
+  .login-screen-form-group label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .login-screen-box input[type="text"],
+  .login-screen-box input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    margin-left: -8px;
+  }
+  
+  .login-screen-box button {
+    background-color: #40D3D6;
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .login-screen-box button:hover {
+    background-color: #245487;
+  }
+  
+  .login-screen-button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .login-screen-register-button {
+    margin-left: 20px;
+  }
+  
