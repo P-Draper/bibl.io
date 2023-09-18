@@ -1,23 +1,42 @@
 import sys
 from pytube import YouTube
-import os
+import io
+import magic
+from pydub import AudioSegment
+import tempfile
+import subprocess
 
-# Get the URL from command-line arguments
-url = sys.argv[1]
 
-# url input from user
-yt = YouTube(url)
+def detect_audio_format(data):
+    mime = magic.Magic()
+    audio_format = mime.from_buffer(data)
+    return audio_format
 
-# extract only audio
-video = yt.streams.filter(only_audio=True).first()
+try:
+    url = sys.argv[1]
+    yt = YouTube(url)
+    video = yt.streams.filter(only_audio=True).first()
+    audio_buffer = io.BytesIO()
+    video.stream_to_buffer(audio_buffer)
+    audio_data = audio_buffer.getvalue()
+    sys.stderr.write(f"Length of the audio data before conversion: {len(audio_data)}")
+    detected_format = detect_audio_format(audio_data)
+    sys.stderr.write(f"The detected audio format is: {detected_format}")
 
-# check for destination to save file
-destination = str()
+    if not detected_format.startswith("audio/mpeg"):
+        sys.stderr.write("Converting to MP3...\n")
+        stream_url = video.url  # <- This line is missing
+        subprocess.run(["ffmpeg", "-i", stream_url, "-f", "mp3", "-ab", "192k", "-ar", "44100", "-vn", "output.mp3"])
+        with open("output.mp3", "rb") as mp3_file:
+            audio_data = mp3_file.read()
+        subprocess.run(["rm", "output.mp3"])
+        sys.stderr.write("Conversion to MP3 successful\n")
 
-# download the file
-out_file = video.download(output_path=destination)
+    # Check the format again
+    detected_format_after_conversion = detect_audio_format(audio_data)
+    sys.stderr.write(f"The detected audio format after potential conversion is: {detected_format_after_conversion}")
 
-# save the file
-base, ext = os.path.splitext(out_file)
-new_file = base + '.mp3'
-os.rename(out_file, new_file)
+    sys.stdout.buffer.write(audio_data)  # Return audio_data as bytes
+
+except Exception as e:
+    sys.stderr.write(f"An error occurred in converter.py: {str(e)}\n")
