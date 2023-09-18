@@ -36,13 +36,13 @@ const MyWords = ({ wordList, addWord, toggleWordCompletion }) => {
           <button onClick={() => addWord(word)}>Add</button>
           <ul>
             {wordList.map((item, index) => (
-              <li
+              <ul
                 key={index}
                 onClick={() => toggleWordCompletion(index)}
                 style={{ textDecoration: item.isCompleted ? 'line-through' : 'none' }}
               >
                 {item.text}
-              </li>
+              </ul>
             ))}
           </ul>
         </div>

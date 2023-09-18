@@ -1,7 +1,13 @@
 from flask_migrate import Migrate
 from flask import Flask, request, make_response, jsonify
 import os
-from mongo import MongoHandler
+from pymongo import MongoClient
+from bson import ObjectId  # Import ObjectId from bson
+from dotenv import load_dotenv
+import logging
+
+load_dotenv()
+logging.basicConfig(level=logging.DEBUG)
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASE = os.environ.get(
@@ -10,29 +16,45 @@ DATABASE = os.environ.get(
 app = Flask(__name__)
 app.json.compact = False
 
-app.post('/convertUrl')
-def convertUrl():
-    """
-    POST request to perform audio conversion from client-served data.
-    Processes goes like so:
+MONGO_URI = os.environ.get("MONGO", '')
+client = MongoClient(MONGO_URI)
+db = client.Test  # Use the "test" database
 
-    1.  Client receives URL from user input for high-level translation.
-            Data passed from client to Server Layer #1: MongoDB.
-    2.  MongoDB receives URL from client for storage and translation.
-            Data passed from Server Layer #1: MongoDB to Server Layer #2: Flask.
-    3.  Flask receives URL from MongoDB for algorithmic conversion. 
-        (***THIS IS WHERE WE ARE!***)
-            Flask invokes custom algorithms to perform conversion 
-            from URL to MP3/Chunks, then passes converted audio from
-            Flask back up to MongoDB.
-    4.  MongoDB receives converted audio from Flask for storage and user serving.
-            Data passed from Server Layer #2: Flask to Server Layer #1: MongoDB.
-    5.  Client receives converted audio from MongoDB for user serving.
-            Data passed from Server Layer #1: MongoDB to client.
-    """
-    url = request.body
-    print(url)
+# Global variable to store the current URL
+current_url = None
 
+@app.route('/getMostRecentUrl', methods=['GET'])
+def get_most_recent_url():
+    global current_url  # Access the global variable
+
+    try:
+        collection = db.urls
+        most_recent_url = collection.find_one({}, sort=[('createdAt', -1)])
+        
+        if most_recent_url:
+            # Convert ObjectId to string
+            most_recent_url['_id'] = str(most_recent_url['_id'])
+            
+            # Update the current_url variable
+            current_url = most_recent_url['Url']
+            
+            logging.debug("Most Recent URL: %s", most_recent_url)
+            return jsonify(most_recent_url), 200
+        else:
+            logging.debug("No data found")
+            return jsonify({"error": "No data found"}), 404
+    except Exception as e:
+        logging.error("Error: %s", str(e))  # Use logging.error instead of logging.exception
+        return jsonify({"error": str(e)}), 500
+
+# Route to get the current URL value
+@app.route('/getCurrentUrl', methods=['GET'])
+def get_current_url():
+    global current_url  # Access the global variable
+    if current_url:
+        return jsonify({"current_url": current_url}), 200
+    else:
+        return jsonify({"error": "No current URL available"}), 404
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
