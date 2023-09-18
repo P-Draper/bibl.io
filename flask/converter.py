@@ -1,6 +1,6 @@
+import sys
 from pytube import YouTube
 import os
-import sys
 
 # Get the URL from command-line arguments
 url = sys.argv[1]
