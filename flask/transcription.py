@@ -32,10 +32,6 @@ def transcribe_audio(audio_data_bytes):
     try:
         print("Type of audio_data_bytes:", type(audio_data_bytes))
 
-        # Save the audio data for manual inspection
-        with open("debug_audio.mp3", "wb") as f:
-            f.write(audio_data_bytes)
-        
         model_id = 'whisper-1'
 
         # Pass the bytes data directly to the transcribe method
