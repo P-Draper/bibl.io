@@ -3,7 +3,7 @@ import axios from 'axios';
 import { franc } from 'franc';
 
 const LeftContainer = () => {
-  const [currentTranslation, setCurrentTranslation] = useState([]);
+  const [currentTranslation, setCurrentTranslation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [detectedLanguage, setDetectedLanguage] = useState('');
 
@@ -13,7 +13,7 @@ const LeftContainer = () => {
       .then((response) => {
         setCurrentTranslation(response.data);
         setLoading(false);
-        const language = detectLanguage(response.data);
+        const language = detectLanguage(response.data.text);
         setDetectedLanguage(language);
       })
       .catch((err) => {
@@ -23,7 +23,7 @@ const LeftContainer = () => {
   }, []);
 
   const detectLanguage = (text) => {
-    return franc(text.join(' '));
+    return franc(text);
   };
 
   return (
@@ -33,11 +33,9 @@ const LeftContainer = () => {
         <p>Loading...</p>
       ) : (
         <div>
-          {currentTranslation.map((item) => (
-            <div key={item.id}>
-              {item.text}
-            </div>
-          ))}
+          <div>
+            {currentTranslation.text}
+          </div>
         </div>
       )}
     </div>

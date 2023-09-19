@@ -3,7 +3,7 @@ import axios from 'axios';
 import { franc } from 'franc';
 
 const LeftContainer = ({ wordList }) => {
-  const [currentTranscription, setCurrentTranscription] = useState('');
+  const [currentTranscription, setCurrentTranscription] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,11 +46,9 @@ const LeftContainer = ({ wordList }) => {
         <p>Loading...</p>
       ) : (
         <div>
-          {currentTranscription.map((item) => (
-            <div key={item.id}>
-              {renderHighlightedText(item.text)}
-            </div>
-          ))}
+          <div>
+            {renderHighlightedText(currentTranscription.text)}
+          </div>
         </div>
       )}
     </div>

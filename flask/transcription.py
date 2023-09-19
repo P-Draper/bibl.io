@@ -3,6 +3,9 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 import openai
 import io
+import codecs
+import json
+import ast
 
 load_dotenv()
 DATABASE = os.environ.get("DB_URI", f"sqlite:///{os.path.abspath(os.path.dirname(__file__))}/app.db")
@@ -18,9 +21,6 @@ class CustomAudioFile:
     def __init__(self, data, name):
         self.data = data
         self.name = name
-        print("CustomAudioFile - data type:", type(self.data))
-        print("CustomAudioFile - initial bytes:", self.data[:100])  # Printing initial bytes
-
     def read(self):
         return self.data
 
@@ -33,8 +33,6 @@ def transcribe_audio(audio_data_bytes):
         print("Type of audio_data_bytes:", type(audio_data_bytes))
 
         model_id = 'whisper-1'
-
-        # Pass the bytes data directly to the transcribe method
         transcription = openai.Audio.transcribe(
             model=model_id,
             file=CustomAudioFile(audio_data_bytes, "temp_audio.mp3"),
@@ -48,7 +46,12 @@ def transcribe_audio(audio_data_bytes):
             print(f"OpenAI Error: {transcription['error']['message']}")
             return None
 
-        return transcription['text']
+        try:
+            decoded_text = ast.literal_eval(f'"{transcription["text"]}"')
+        except (SyntaxError, ValueError):
+            decoded_text = transcription['text']
+
+        return decoded_text
     except Exception as e:
         print(f"Error during transcription: {str(e)}")
         return None

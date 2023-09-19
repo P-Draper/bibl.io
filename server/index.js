@@ -81,17 +81,22 @@ app.get('/getAudio', (req, res) =>{
     .catch(err => res.json(err))
 })
 
-app.get('/getTranscription', (req, res) =>{
+app.get('/getTranscription', (req, res) => {
     TranscriptionModel.find()
-    .then(transcript => res.json(transcript))
-    .catch(err => res.json(err))
-})
+    .sort({ createdAt: -1 }) // sort by createdAt in descending order
+    .limit(1) // return only the latest object
+    .then(transcription => res.json(transcription[0])) // send the first (latest) object
+    .catch(err => res.json(err));
+});
 
-app.get('/getTranslation', (req, res) =>{
+app.get('/getTranslation', (req, res) => {
     TranslationModel.find()
-    .then(translation => res.json(translation))
-    .catch(err => res.json(err))
-})
+    .sort({ createdAt: -1 }) // sort by createdAt in descending order
+    .limit(1) // return only the latest object
+    .then(translation => res.json(translation[0])) // send the first (latest) object
+    .catch(err => res.json(err));
+});
+
 
 app.get('/getWordList', (req, res) => {
     WordListModel.find()
