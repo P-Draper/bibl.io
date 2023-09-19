@@ -16,6 +16,7 @@ import openai
 import tempfile
 import json
 from datetime import datetime
+from threading import Thread
 
 load_dotenv()
 
@@ -33,6 +34,36 @@ db = client.Test
 fs = GridFS(db)
 temp_dir = tempfile.gettempdir()  # Get the system's temporary directory
 temp_audio_path = os.path.join(temp_dir, "temp_audio.wav")
+
+def monitor_db_changes():
+    with db.urls.watch() as stream:
+        for change in stream:
+            if change["operationType"] in ["insert", "replace", "update"]:
+                handle_most_recent_url()
+
+def handle_most_recent_url():
+    with app.app_context():
+        try:
+            collection = db.urls
+            most_recent_url = collection.find_one({}, sort=[('createdAt', -1)])
+
+            if most_recent_url:
+                most_recent_url['_id'] = str(most_recent_url['_id'])
+                current_url = most_recent_url['Url']
+                result = run(["python", "converter.py", current_url], capture_output=True, text=False)
+                mp3_data = result.stdout
+                converter_errors = result.stderr
+                if mp3_data:
+                    transcription_result, status_code = transcribe_and_upload_audio(mp3_data, current_url)
+                    print(jsonify(transcription_result))
+                else:
+                    print(jsonify({"error": "Error converting URL to MP3"}))
+            else:
+                print(jsonify({"error": "No data found"}))
+        except UnicodeDecodeError as ude:
+            print(jsonify({"error": "Unicode decoding issue"}))
+        except Exception as e:
+            print(jsonify({"error": str(e)}))
 
 
 def transcribe_and_upload_audio(mp3_data, current_url):
@@ -75,6 +106,7 @@ def get_most_recent_url():
     try:
         collection = db.urls
         most_recent_url = collection.find_one({}, sort=[('createdAt', -1)])
+        handle_most_recent_url()
 
         if most_recent_url:
             most_recent_url['_id'] = str(most_recent_url['_id'])
@@ -110,4 +142,6 @@ def get_current_url():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
+    monitor_thread = Thread(target=monitor_db_changes)
+    monitor_thread.start()
     app.run(port=5555, debug=True)

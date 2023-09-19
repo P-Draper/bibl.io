@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { franc } from 'franc';
 
+const POLL_INTERVAL = 5000
+
 const LeftContainer = ({ wordList }) => {
   const [currentTranscription, setCurrentTranscription] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,6 +21,9 @@ const LeftContainer = ({ wordList }) => {
     };
 
     fetchTranscription();
+  const interval = setInterval(fetchTranscription, POLL_INTERVAL); // Polling
+
+    return () => clearInterval(interval); // Cleanup on unmount
   }, []);
 
   const renderHighlightedText = (text) => {
