@@ -17,7 +17,7 @@ body {
 header {
   display: flex;
   justify-content: center; 
-  margin-left: 630px;
+  margin-left: 480px;
   padding: 20px;
   background-color: #245487;
   color: #fff;
@@ -63,17 +63,17 @@ button {
 .submit-button{
   background-color: #e5e2d6;
   color: black;
-  border: 2px solid #40D3D6;
+  border: 1px solid #40D3D6;
   padding: 8px 16px;
   cursor: pointer;
   border-radius: 30px;
   font-weight: bold;
   font-size: 16px;
-  transition: background-color 0.6s ease; 
+  transition: background-color 0.7s ease; 
 }
 
 button:hover {
-  background-color: #06DADD; 
+  background-color: #245487; 
   color: white
 }
 
@@ -138,8 +138,8 @@ button:hover {
   margin-left: 25px;
   background-color: #e5e2d6;
   padding: 20px;
-  overflow-y: auto;
-  height: 100%;
+  overflow-y: auto; 
+  max-height: calc(100vh - 100px);  /* adjust this value based on your header height or other fixed heights on the page */
   border-radius: 20px;
 }
 
@@ -148,9 +148,9 @@ button:hover {
   padding: 20px;
   margin: 0 10px;
   text-align: center;
-  overflow-y: auto;
-  height: 100%;
+  max-height: calc(100vh - 140px);  /* adjust this value based on your header height or other fixed heights in the containers */
 }
+
 .detected-lang {
   margin-left: -630px;
   margin-top: -5px;
@@ -179,11 +179,168 @@ button:hover {
   top: 100%;
   left: 0;
   background-color: #245487;
-  z-index: 1; /* Ensure it appears above other content */
+  z-index: 1; 
   display: none;
 }
 
 .signout-dropdown:hover .dropdown-content {
-  display: block; /* Show the dropdown when the button is hovered */
+  display: block; 
 }
 
+
+.pencil {
+	display: block;
+	width: 10em;
+	height: 10em;
+  margin-left: -100px;
+  z-index: 100;
+}
+.pencil__body1,
+.pencil__body2,
+.pencil__body3,
+.pencil__eraser,
+.pencil__eraser-skew,
+.pencil__point,
+.pencil__rotate,
+.pencil__stroke {
+	animation-duration: 3s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+.pencil__body1,
+.pencil__body2,
+.pencil__body3 {
+	transform: rotate(-90deg);
+}
+.pencil__body1 {
+	animation-name: pencilBody1;
+}
+.pencil__body2 {
+	animation-name: pencilBody2;
+}
+.pencil__body3 {
+	animation-name: pencilBody3;
+}
+.pencil__eraser {
+	animation-name: pencilEraser;
+	transform: rotate(-90deg) translate(49px,0);
+}
+.pencil__eraser-skew {
+	animation-name: pencilEraserSkew;
+	animation-timing-function: ease-in-out;
+}
+.pencil__point {
+	animation-name: pencilPoint;
+	transform: rotate(-90deg) translate(49px,-30px);
+}
+.pencil__rotate {
+	animation-name: pencilRotate;
+}
+.pencil__stroke {
+	animation-name: pencilStroke;
+	transform: translate(100px,100px) rotate(-113deg);
+}
+
+@keyframes pencilBody1 {
+	from,
+	to {
+		stroke-dashoffset: 351.86;
+		transform: rotate(-90deg);
+	}
+	50% {
+		stroke-dashoffset: 150.8; /* 3/8 of diameter */
+		transform: rotate(-225deg);
+	}
+}
+@keyframes pencilBody2 {
+	from,
+	to {
+		stroke-dashoffset: 406.84;
+		transform: rotate(-90deg);
+	}
+	50% {
+		stroke-dashoffset: 174.36;
+		transform: rotate(-225deg);
+	}
+}
+@keyframes pencilBody3 {
+	from,
+	to {
+		stroke-dashoffset: 296.88;
+		transform: rotate(-90deg);
+	}
+	50% {
+		stroke-dashoffset: 127.23;
+		transform: rotate(-225deg);
+	}
+}
+@keyframes pencilEraser {
+	from,
+	to {
+		transform: rotate(-45deg) translate(49px,0);
+	}
+	50% {
+		transform: rotate(0deg) translate(49px,0);
+	}
+}
+@keyframes pencilEraserSkew {
+	from,
+	32.5%,
+	67.5%,
+	to {
+		transform: skewX(0);
+	}
+	35%,
+	65% {
+		transform: skewX(-4deg);
+	}
+	37.5%, 
+	62.5% {
+		transform: skewX(8deg);
+	}
+	40%,
+	45%,
+	50%,
+	55%,
+	60% {
+		transform: skewX(-15deg);
+	}
+	42.5%,
+	47.5%,
+	52.5%,
+	57.5% {
+		transform: skewX(15deg);
+	}
+}
+@keyframes pencilPoint {
+	from,
+	to {
+		transform: rotate(-90deg) translate(49px,-30px);
+	}
+	50% {
+		transform: rotate(-225deg) translate(49px,-30px);
+	}
+}
+@keyframes pencilRotate {
+	from {
+		transform: translate(100px,100px) rotate(0);
+	}
+	to {
+		transform: translate(100px,100px) rotate(720deg);
+	}
+}
+@keyframes pencilStroke {
+	from {
+		stroke-dashoffset: 439.82;
+		transform: translate(100px,100px) rotate(-113deg);
+	}
+	50% {
+		stroke-dashoffset: 164.93;
+		transform: translate(100px,100px) rotate(-113deg);
+	}
+	75%,
+	to {
+		stroke-dashoffset: 439.82;
+		transform: translate(100px,100px) rotate(112deg);
+	}
+}

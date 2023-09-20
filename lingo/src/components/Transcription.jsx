@@ -4,9 +4,9 @@ import { franc } from 'franc';
 
 const POLL_INTERVAL = 5000
 
-const LeftContainer = ({ wordList }) => {
+const LeftContainer = ({ wordList, loading, setLoading, newRender, setNewRender  }) => {
   const [currentTranscription, setCurrentTranscription] = useState(null);
-  const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     const fetchTranscription = async () => {
@@ -23,7 +23,7 @@ const LeftContainer = ({ wordList }) => {
     fetchTranscription();
   const interval = setInterval(fetchTranscription, POLL_INTERVAL); // Polling
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
   }, []);
 
   const renderHighlightedText = (text) => {
@@ -46,18 +46,18 @@ const LeftContainer = ({ wordList }) => {
   };
 
   return (
-    <div className="container">
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <div>
-            {renderHighlightedText(currentTranscription.text)}
+    newRender ? <div></div> : (
+      <div className="container">
+          <div>{loading ? (
+          <div></div>
+        ) : (
+            <div>
+              {currentTranscription && renderHighlightedText(currentTranscription.text)}
+            </div>
+        )}
           </div>
-        </div>
-      )}
-    </div>
+      </div>
+    )
   );
-};
-
+}
 export default LeftContainer;

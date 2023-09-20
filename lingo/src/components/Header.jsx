@@ -5,7 +5,7 @@ import axios from 'axios';
 import MyWords from './MyWords';
 import SignOut from './SignOut';
 
-const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl, username }) => {
+const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl, username, loading, setLoading, newRender, setNewRender }) => {
   const [desiredLanguage, setDesiredLanguage] = useState('');
 
   useEffect(() => {
@@ -21,6 +21,8 @@ const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl, username
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true)
+    setNewRender(false)
     try {
       if (url.includes('www.youtube.com')) {
         console.log('URL:', url);
@@ -54,8 +56,8 @@ const Header = ({ wordList, addWord, toggleWordCompletion, url, setUrl, username
         </div>
         <div className="header-right">
           <div className="language-and-signin">
-            <LanguageDropdown onLanguageChange={handleLanguageChange} />
-            <MyWords wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} />
+            {/*<LanguageDropdown onLanguageChange={handleLanguageChange} newRender={newRender}/>*/}
+            <MyWords wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} newRender={newRender} />
             {username ? <SignOut username={username}/> : <SignIn />}
           </div>
         </div>

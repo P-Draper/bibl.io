@@ -9,6 +9,8 @@ import ContainerHead from '../../components/ContainerHead';
 import axios from 'axios';
 
 function App() {
+  const [newRender, setNewRender] = useState(true)
+  const [loading, setLoading] = useState(true);
   const [wordList, setWordList] = useState([]);
   const [username, setUsername] = useState('')
   const addWord = (word) => {
@@ -66,22 +68,26 @@ useEffect(() => {
       });
   }
 }, [url]);
-  return (
-    <div className="App">
-      <Header wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} url={url} setUrl={handleUrlChange} username={username}/>
-      <Player />
-      <div>
-        <ContainerHead videoTitle={videoTitle}/>
-      </div>
-      <div className="containers">
-        <Transcription wordList={wordList}/>
-        <Translation />
-      </div>
-      <div>
-        <Footer/>
-      </div>
+return (
+  <div className="App">
+    <Header wordList={wordList} addWord={addWord} toggleWordCompletion={toggleWordCompletion} url={url} setUrl={handleUrlChange} username={username} loading={loading} setLoading={setLoading} newRender={newRender} setNewRender={setNewRender}/>
+    <Player newRender={newRender} setNewRender={setNewRender}/>
+    <div>
+      <ContainerHead videoTitle={videoTitle} newRender={newRender} setNewRender={setNewRender}/>
     </div>
-  );
+    {
+      !newRender && 
+      <div className="containers">
+        <Transcription wordList={wordList} loading={loading} setLoading={setLoading} newRender={newRender} setNewRender={setNewRender}/>
+        <Translation loading={loading} setLoading={setLoading} newRender={newRender} setNewRender={setNewRender}/>
+      </div>
+    }
+    <div>
+      <Footer/>
+    </div>
+  </div>
+);
+
 }
 
 export default App;

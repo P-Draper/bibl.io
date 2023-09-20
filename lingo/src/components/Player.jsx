@@ -30,7 +30,7 @@ const Div = styled('div')(({theme}) => ({
 }))
 
 const CustomPaper = styled(Paper)(({theme}) => ({
-    backgroundColor: '#06DADD',
+    background: 'linear-gradient(180deg, #66BBFF, #AAEEFF)',
     marginLeft: theme.spacing(40),
     marginRight: theme.spacing(40),
     padding: theme.spacing(),
@@ -55,7 +55,7 @@ const PSlider = styled(Slider)(({theme, ...props}) => ({
 const playlist = [film, simpsons, bolano, spanish];
 
 
-export default function Player() {
+export default function Player({newRender}) {
     const [requestedAudio, setRequestedAudio] = useState([])
     const audioPlayer = useRef()
 
@@ -86,7 +86,7 @@ export default function Player() {
 
     const [elapsed, setElapsed] = useState(0);
     const [duration, setDuration] = useState(0);
-
+/* fix this function later - volume slider
     useEffect(() => {
         if(audioPlayer){
             audioPlayer.current.volume = volume / 100;
@@ -106,7 +106,7 @@ export default function Player() {
     }, [
         volume, isPlaying
     ]);
-
+*/
     function formatTime(time) {
         if(time && !isNaN(time)){
             const minutes = Math.floor(time / 60) < 10 ? `0${Math.floor(time / 60)}` : Math.floor(time / 60);
@@ -163,6 +163,7 @@ export default function Player() {
     }
 
     return (
+        !newRender ? (
         <Div>
             <audio src={currentAudio} ref={audioPlayer} muted={mute} />
             <CustomPaper>
@@ -220,6 +221,6 @@ export default function Player() {
                     <Typography sx={{color: 'black'}}>{formatTime(duration - elapsed)}</Typography>
                 </Stack>
             </CustomPaper>
-        </Div>
+        </Div>) : null
     )
 }
