@@ -37,7 +37,7 @@ function LoginScreen() {
         )
       localStorage.setItem('userInfo', JSON.stringify(data))
       setLoading(false)
-      navigate('/'); // Use navigate for navigation
+      navigate('/');
     } catch(error) {
       setError(error.response.data.message)
     }

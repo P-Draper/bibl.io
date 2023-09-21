@@ -86,7 +86,7 @@ export default function Player({newRender}) {
 
     const [elapsed, setElapsed] = useState(0);
     const [duration, setDuration] = useState(0);
-/* fix this function later - volume slider
+/*
     useEffect(() => {
         if(audioPlayer){
             audioPlayer.current.volume = volume / 100;
