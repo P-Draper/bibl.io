@@ -21,5 +21,5 @@
 <h4 align="center">A full-stack web app that serves as a language learning tool to turn any YouTube video into a learning resource. </h4>
 
 <p align="center">
-    <img src="https://ibb.co/GTHwJ0H" alt="Project Banner" width=60% height=60%/>
+    <img src="./projectbanner.png" alt="Project Banner" width=60% height=60%/>
 </p>
