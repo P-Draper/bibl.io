@@ -25,18 +25,17 @@ try:
 
     if not detected_format.startswith("audio/mpeg"):
         sys.stderr.write("Converting to MP3...\n")
-        stream_url = video.url  # <- This line is missing
+        stream_url = video.url  
         subprocess.run(["ffmpeg", "-i", stream_url, "-f", "mp3", "-ab", "192k", "-ar", "44100", "-vn", "output.mp3"])
         with open("output.mp3", "rb") as mp3_file:
             audio_data = mp3_file.read()
         subprocess.run(["rm", "output.mp3"])
         sys.stderr.write("Conversion to MP3 successful\n")
 
-    # Check the format again
     detected_format_after_conversion = detect_audio_format(audio_data)
     sys.stderr.write(f"The detected audio format after potential conversion is: {detected_format_after_conversion}")
 
-    sys.stdout.buffer.write(audio_data)  # Return audio_data as bytes
+    sys.stdout.buffer.write(audio_data) 
 
 except Exception as e:
     sys.stderr.write(f"An error occurred in converter.py: {str(e)}\n")

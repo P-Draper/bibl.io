@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './RegisterScreen.css'; // Create a new CSS file for styling if needed
+import './RegisterScreen.css'; 
 import axios from 'axios';
 
 function RegisterScreen() {

@@ -23,7 +23,6 @@ function SignOut({ username }) {
       {isDropdownOpen && (
         <div className="dropdown-content">
           <button onClick={handleLogOutClick}>Sign Out</button>
-          {/* Add other dropdown items if needed */}
         </div>
       )}
     </div>

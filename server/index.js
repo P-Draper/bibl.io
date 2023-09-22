@@ -83,17 +83,17 @@ app.get('/getAudio', (req, res) =>{
 
 app.get('/getTranscription', (req, res) => {
     TranscriptionModel.find()
-    .sort({ createdAt: -1 }) // sort by createdAt in descending order
-    .limit(1) // return only the latest object
-    .then(transcription => res.json(transcription[0])) // send the first (latest) object
+    .sort({ createdAt: -1 }) 
+    .limit(1) 
+    .then(transcription => res.json(transcription[0]))
     .catch(err => res.json(err));
 });
 
 app.get('/getTranslation', (req, res) => {
     TranslationModel.find()
-    .sort({ createdAt: -1 }) // sort by createdAt in descending order
-    .limit(1) // return only the latest object
-    .then(translation => res.json(translation[0])) // send the first (latest) object
+    .sort({ createdAt: -1 }) 
+    .limit(1) 
+    .then(translation => res.json(translation[0]))
     .catch(err => res.json(err));
 });
 
@@ -109,28 +109,8 @@ app.get('/getUrl', (req, res) => {
     .then(url => res.json(url))
     .catch(err => res.json(err))
 })
-//posts
 
 app.post('/postUrl', (req, res) => {
-    /*
-    POST request to perform audio conversion from client-served data.
-    Processes goes like so:
-
-    1.  Client receives URL from user input for high-level translation.
-            Data passed from client to Server Layer #1: MongoDB.
-    2.  MongoDB receives URL from client for storage and translation.
-        (***THIS IS WHERE WE COULD BE!***)
-            Data passed from Server Layer #1: MongoDB to Server Layer #2: Flask.
-    3.  Flask receives URL from MongoDB for algorithmic conversion. 
-            Flask invokes custom algorithms to perform conversion 
-            from URL to MP3/Chunks, then passes converted audio from
-            Flask back up to MongoDB.
-    4.  MongoDB receives converted audio from Flask for storage and user serving.
-        (***THIS IS ALSO WHERE WE COULD BE!***)
-            Data passed from Server Layer #2: Flask to Server Layer #1: MongoDB.
-    5.  Client receives converted audio from MongoDB for user serving.
-            Data passed from Server Layer #1: MongoDB to client.
-    */
     const { Url, DesiredLanguage } = req.body;
 
     const newUrl = new UrlModel({ Url, DesiredLanguage });

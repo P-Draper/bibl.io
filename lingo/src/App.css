@@ -143,7 +143,7 @@ button:hover {
   background-color: #e5e2d6;
   padding: 20px;
   overflow-y: auto; 
-  max-height: calc(100vh - 100px);  /* adjust this value based on your header height or other fixed heights on the page */
+  max-height: calc(100vh - 100px); 
   border-radius: 20px;
 }
 
@@ -152,7 +152,7 @@ button:hover {
   padding: 20px;
   margin: 0 10px;
   text-align: center;
-  max-height: calc(100vh - 140px);  /* adjust this value based on your header height or other fixed heights in the containers */
+  max-height: calc(100vh - 140px);
 }
 
 .detected-lang {
@@ -252,7 +252,7 @@ button:hover {
 		transform: rotate(-90deg);
 	}
 	50% {
-		stroke-dashoffset: 150.8; /* 3/8 of diameter */
+		stroke-dashoffset: 150.8; 
 		transform: rotate(-225deg);
 	}
 }

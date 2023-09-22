@@ -21,7 +21,6 @@ class LanguageDropdown extends Component {
       isOpen: false,
     });
 
-    // Call the callback function with the selected language
     this.props.onLanguageChange(language);
   };
 

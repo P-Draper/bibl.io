@@ -21,7 +21,7 @@ const LeftContainer = ({ wordList, loading, setLoading, newRender, setNewRender 
     };
 
     fetchTranscription();
-  const interval = setInterval(fetchTranscription, POLL_INTERVAL); // Polling
+  const interval = setInterval(fetchTranscription, POLL_INTERVAL); 
 
     return () => clearInterval(interval);
   }, []);

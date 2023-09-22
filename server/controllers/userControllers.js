@@ -8,7 +8,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
         console.log('Received registration request for username:', username);
 
-        // Check if the user already exists
         const userExists = await UserModel.findOne({ username });
 
         if (userExists) {
@@ -19,13 +18,11 @@ const registerUser = asyncHandler(async (req, res) => {
 
         console.log('Creating a new user with username:', username);
 
-        // Create a new user
         const user = new UserModel({
             username,
             password,
         });
 
-        // Save the user to the database
         const savedUser = await user.save();
 
         if (savedUser) {
@@ -67,7 +64,6 @@ const authUser = asyncHandler(async (req, res) => {
         return;
     }
 
-    // If user and password match, generate and send a token.
     res.json({
         _id: user._id,
         username: user.username,

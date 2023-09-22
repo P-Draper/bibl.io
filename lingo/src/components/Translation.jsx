@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { franc } from 'franc';
 
-const POLL_INTERVAL = 5000; // 5 seconds
+const POLL_INTERVAL = 5000;
 
 const LeftContainer = ({ loading, setLoading, newRender, setNewRender }) => {
   const [currentTranslation, setCurrentTranslation] = useState(null);

@@ -1,13 +1,10 @@
-/* RegisterScreen.css */
 
-/* Style for the header */
 .register-screen-header {
     position: absolute;
-    top: 10px; /* Adjust the top position as needed */
-    left: 10px; /* Adjust the left position as needed */
+    top: 10px; 
+    left: 10px; 
   }
   
-  /* Style for the "bibl.io" link */
   .register-screen-home-link {
     font-size: 40px;
     margin-left: 20px;

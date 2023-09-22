@@ -32,7 +32,7 @@ MONGO_URI = os.environ.get("MONGO", '')
 client = MongoClient(MONGO_URI)
 db = client.Test
 fs = GridFS(db)
-temp_dir = tempfile.gettempdir()  # Get the system's temporary directory
+temp_dir = tempfile.gettempdir()
 temp_audio_path = os.path.join(temp_dir, "temp_audio.wav")
 
 def monitor_db_changes():
@@ -77,7 +77,6 @@ def transcribe_and_upload_audio(mp3_data, current_url):
             mp3_file.write(mp3_data)
 
         if transcription:
-            # Save transcription to db.transcription
             transcription_collection = db.transcriptions
             transcription_collection.insert_one({
                 'text': transcription,
@@ -85,7 +84,6 @@ def transcribe_and_upload_audio(mp3_data, current_url):
             })
 
         if translation:
-            # Save translation to db.translation
             translation_collection = db.translations
             translation_collection.insert_one({
                 'text': translation,
