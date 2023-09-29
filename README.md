@@ -30,7 +30,6 @@
 - [Technical Requirements](#technical-requirements)
 - [Project Structure](#project-structure)
 - [Key Functionalities](#key-functionalities)
-- [Project Features](#project-features)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Dependencies](#dependencies)
@@ -113,3 +112,100 @@ bibl.io/
 <p align="center">
     <img src="./dataflow.png" alt="Project Banner" width=60% height=60%/>
 </p>
+
+## Key Functionalities
+
+bibl.io offers the following functionalities:
+
+- Insert any YouTube URL into the search bar and click bibl.io!
+- The URL is converted to an mp3 and supplied to the media player.
+- The mp3 is fed into the Whisper API where it is converted into a transcription and translation.
+- The transcription and translation are rendered on the page.
+- Log in functionality with JWT is supported.
+- Users can register and their credentials are safely encrypted with bcrypt.
+
+## Getting Started
+
+1. Clone this repository to your local machine:
+
+```bash
+git clone https://github.com/P-Draper/bibl.io.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd project
+```
+2A. In one terminal navigate to the flask directory and pip install:
+
+```bash
+cd flask
+pip install
+```
+2B. In one terminal navigate to the lingo directory and npm install:
+
+```bash
+cd lingo
+npm install
+```
+2C. In one terminal navigate to the server directory and npm install:
+
+```bash
+cd server
+npm install
+```
+
+3. Run servers in each respective directory:
+
+flask/:
+```bash
+python app.py
+```
+
+lingo/ and server/:
+```bash
+npm start
+```
+
+## Usage
+
+1. Insert a YouTube URL.
+2. Play the corresponding mp3 in the media player.
+3. Follow along with the transcription and translation.
+4. Insert words you may struggle with into your word list to remind yourself of later.
+5. Create a user.
+6. Login and logout.
+
+## Dependencies
+
+The NFL Player Statistics Dashboard relies on the following libraries:
+-
+
+## Contributing
+
+Contributions to bibl.io are welcome! If you encounter any issues, have feature suggestions, or would like to contribute code, please open an issue or pull request on the GitHub repository.
+
+## License
+
+MIT License
+
+Copyright (c) 2023 Peter Draper
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
