@@ -48,7 +48,7 @@ const [videoTitle, setVideoTitle] = useState('');
 
 useEffect(() => {
   if (url.trim() !== '') {
-    const apiKey = 'AIzaSyDoufgxgfWbxd5YywuHm5WBYGxNP9r1oIU'
+    const apiKey = ''
     const videoId = url.split('=')[1];
     const apiEndpoint = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet`;
     
