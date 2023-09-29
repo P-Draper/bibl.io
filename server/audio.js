@@ -4,7 +4,7 @@ const path = require('path');
 
 const dbName = 'Test';
 
-mongoose.connect(`mongodb+srv://draperpa:bCgo4fA5WpyTuuIO@cluster0.9gjpik1.mongodb.net/${dbName}`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(``, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
