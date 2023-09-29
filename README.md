@@ -87,5 +87,21 @@ bibl.io/
 │ └── Index.css
 │ └── Index.js
 ├── server/
+│ └── controllers/
+│ │   └── userControllers.js
+│ └── middlewares/
+│ │   └── errorMiddleware.js
+│ └── models/
+│ │   └── Audio.js
+│ │   └── Transcription.js
+│ │   └── Translation.js
+│ │   └── Url.js
+│ │   └── User.js
+│ │   └── Wordlist.js
+│ └── routes/
+│ │   └── userRoutes.js
+│ └── utils/
+│ │   └── generateToken.js
+│ └── index.js
 └── README.md
 ```
