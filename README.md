@@ -61,8 +61,31 @@ bibl.io/
 │ └── translation.py
 ├── lingo/
 │ └── src/
-│ │   └──
-│ └── 
+│ │   └── components/
+│ │   │   └── ContainerHead.jsx
+│ │   │   └── Footer.jsx
+│ │   │   └── Header.jsx
+│ │   │   └── LanguageDropdown.jsx
+│ │   │   └── MyWords.jsx
+│ │   │   └── Player.jsx
+│ │   │   └── SignIn.jsx
+│ │   │   └── SignOut.jsx
+│ │   │   └── Transcription.jsx
+│ │   │   └── Translation.jsx
+│ │   │   └── WordContainer.css
+│ │   └── screens/
+│ │       └── LandingPage/
+│ │           └── LandingPage.js
+│ │       └── LoginScreen/
+│ │           └── LoginScreen.css
+│ │           └── LoginScreen.js
+│ │       └── RegisterScreen/
+│ │           └── RegisterScreen.css
+│ │           └── RegisterScreen.js
+│ └── App.css
+│ └── App.js
+│ └── Index.css
+│ └── Index.js
 ├── server/
 └── README.md
 ```
