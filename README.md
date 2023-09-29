@@ -45,6 +45,12 @@ bibl.io is a language learning tool that provides users a way to turn any YouTub
 To run bibl.io locally, you need the following:
 
 - Python 3.7 or later
+- axios 1.5.0 or later
+- express 4.18.2 or later
+- mongodb 6.1.0 or later
+- mongoose 7.5.1 or later
+- bcryptjs 2.4.3 or later
+- jsonwebtoken 9.0.2 or later
 
 ## Project Directory Hierarchy
 
