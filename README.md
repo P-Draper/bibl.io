@@ -105,3 +105,11 @@ bibl.io/
 │ └── index.js
 └── README.md
 ```
+- `flask/`: Directory containing backend logic and python files that are sent directly to OpenAI Whisper API.
+- `lingo/`: Directory containing the frontend React logic which communicates with the React `server/`.
+- `server/`: Directory containing the backend React logic which communicates to MongoDB as well as the frontend. 
+- `README.md`: Project documentation providing an overview, setup instructions, and other details.
+
+<p align="center">
+    <img src="./dataflow.png" alt="Project Banner" width=60% height=60%/>
+</p>
