@@ -180,7 +180,12 @@ npm start
 ## Dependencies
 
 bibl.io relies on the following libraries:
--
+- React
+- Express.js
+- Axios
+- Mongoose
+- pymongo
+- gridfs
 
 ## Contributing
 
