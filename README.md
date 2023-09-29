@@ -179,7 +179,7 @@ npm start
 
 ## Dependencies
 
-The NFL Player Statistics Dashboard relies on the following libraries:
+bibl.io relies on the following libraries:
 -
 
 ## Contributing
